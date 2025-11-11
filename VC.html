@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ban's & Mish Cafe</title>
+    
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo img {
+            height: 45px; /* Adjust size as needed */
+            width: auto;
+            border-radius: 50%; /* optional for rounded look */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f5f0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #5c3a21;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .nav-toggle {
+            display: none;
+        }
+        
+        .nav-toggle-label {
+            display: none;
+            cursor: pointer;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #e6c9a6;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://img.freepik.com/free-vector/top-view-cup-coffee-with-roasted-beans_52683-32340.jpg) no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #8b5a2b;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #6d451c;
+        }
+        
+        /* Menu Section */
+        .menu {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #5c3a21;
+        }
+        
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .category-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .category-btn.active {
+            border-color: #8b5a2b;
+            color: #8b5a2b;
+            font-weight: bold;
+        }
+        
+        .menu-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .menu-item {
+            background-color: #f8f5f0;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+        
+        .menu-item h3 {
+            color: #5c3a21;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price {
+            color: #8b5a2b;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background-color: #f2e6d9;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .contact-info {
+            text-align: center;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #5c3a21;
+        }
+        
+        .phone-number {
+            font-size: 1.8rem;
+            color: #8b5a2b;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .email {
+            font-size: 1.2rem;
+            color: white;
+            background-color: brown;
+            padding: 0.5rem;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+        
+        .hours {
+            margin-top: 2rem;
+        }
+        
+        .hours h4 {
+            margin-bottom: 1rem;
+            color: #5c3a21;
+        }
+        
+        /* Registration Section */
+        .register {
+            padding: 5rem 0;
+            background-color: #f2e6d9;
+        }
+        
+        .register-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .register-form h3 {
+            text-align: center;
+            color: #5c3a21;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #5c3a21;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #8b5a2b;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #5c3a21;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        /* Enhanced Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 0 10px;
+            }
+            
+            .header-container {
+                padding: 0 10px;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            .logo img {
+                height: 35px;
+            }
+            
+            .nav-toggle-label {
+                display: block;
+                font-size: 1.5rem;
+                padding: 0.5rem;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #5c3a21;
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+            
+            .nav-toggle:checked ~ ul {
+                display: flex;
+            }
+            
+            .hero {
+                height: 60vh; /* Reduced height for mobile */
+                padding: 1rem;
+            }
+            
+            .hero-content {
+                padding: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .menu {
+                padding: 3rem 0;
+            }
+            
+            .menu-categories {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .category-btn {
+                margin-bottom: 0.5rem;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .menu-item {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .menu-item img {
+                height: 180px;
+            }
+            
+            .menu-item-content {
+                padding: 1rem;
+            }
+            
+            .about {
+                padding: 3rem 0;
+            }
+            
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-text,
+            .about-image {
+                min-width: auto;
+                width: 100%;
+            }
+            
+            .contact {
+                padding: 3rem 0;
+            }
+            
+            .phone-number {
+                font-size: 1.5rem;
+            }
+            
+            .email {
+                font-size: 1rem;
+                padding: 0.4rem;
+            }
+            
+            .hours p {
+                font-size: 0.9rem;
+            }
+            
+            .register {
+                padding: 3rem 0;
+            }
+            
+            .register-form {
+                padding: 1.5rem;
+            }
+            
+            .form-group input,
+            .form-group textarea {
+                padding: 0.7rem;
+                font-size: 0.9rem;
+            }
+            
+            footer {
+                padding: 1rem 0;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Additional mobile optimizations for very small screens */
+        @media (max-width: 480px) {
+            .hero {
+                height: 50vh;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .menu-item {
+                width: 100%;
+            }
+            
+            .menu-item img {
+                height: 150px;
+            }
+            
+            .register-form {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="C:\Users\Acer\Downloads\ChatGPT Image Oct 4, 2025, 02_54_51 PM.png" alt="Ban's & Mish Cafe Logo">
+                <span>Ban's & Mish Cafe</span>
+            </div>
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-toggle-label">☰</label>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#register">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Ban's & Mish Cafe</h1>
+            <p>Experience the finest coffee and delicious food in a cozy atmosphere</p>
+            <a href="#menu" class="btn">View Our Menu</a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
+            <div class="menu-categories">
+                <button class="category-btn active">Coffee</button>
+                <button class="category-btn">Pastries</button>
+                <button class="category-btn">Sandwiches</button>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <img src="https://media.istockphoto.com/id/505168330/photo/cup-of-cafe-latte-with-coffee-beans-and-cinnamon-sticks.jpg?s=612x612&w=0&k=20&c=h7v8kAfWOpRapv6hrDwmmB54DqrGQWxlhP_mTeqTQPA=" alt="Espresso">
+                    <div class="menu-item-content">
+                        <h3>Espresso</h3>
+                        <p>Strong and aromatic espresso shot</p>
+                        <p class="price">₹120</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://www.allrecipes.com/thmb/chsZz0jqIHWYz39ViZR-9k_BkkE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/8624835-how-to-make-a-cappuccino-beauty-4x3-0301-13d55eaad60b42058f24369c292d4ccb.jpg" alt="Cappuccino">
+                    <div class="menu-item-content">
+                        <h3>Cappuccino</h3>
+                        <p>Perfect blend of espresso, steamed milk, and foam</p>
+                        <p class="price">₹150</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRf9Ds2262BNDa5SdgjFb2aCI4rJx27AUZSA&s" alt="Butter Croissant">
+                    <div class="menu-item-content">
+                        <h3>Butter Croissant</h3>
+                        <p>Flaky and buttery pastry, perfect with coffee</p>
+                        <p class="price">₹90</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Ban's & Mish Cafe was established with a simple mission: to create a welcoming space where people can enjoy high-quality coffee and delicious food.</p>
+                    <p>Our passion for excellent coffee drives us to source the finest beans and master the art of brewing. Every cup is crafted with care and expertise.</p>
+                    <p>We believe that a great cafe is more than just a place to grab coffee - it's a community hub where friendships are forged and ideas are born.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://m.media-amazon.com/images/I/71sgo6UiVUL._UF894,1000_QL80_.jpg" alt="Warm cafe interior with customers chatting and enjoying beverages">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-info">
+                <h3>We'd love to hear from you</h3>
+                <p>Come enjoy our cozy atmosphere and delicious offerings</p>
+                <p class="phone-number">9099902081</p>
+                <p class="email">patelbansari.pk@gmail.com</p>
+                <p class="email">shahmishwa04@gmail.com</p>
+                <div class="hours">
+                    <h4>Opening Hours</h4>
+                    <p>Monday - Friday: 10:00 AM - 10:00 PM</p>
+                    <p>Saturday - Sunday: 8:00 AM - 11:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+<section id="register" class="register" style="background-color:#f5f0e0; display: flex; justify-content: center; align-items: center; padding: 5rem 0;">
+    <div class="container" style="max-width: 350px;">
+
+        <h2 class="section-title" style="color:#6b3e0e; font-weight: 700; font-size: 2rem; text-align: center; margin-bottom: 2rem;">
+            Register with Us
+        </h2>
+
+        <form class="registration-form" style="border: 2px solid #6b3e0e; border-radius: 4px; padding: 20px; background-color: white;">
+
+            <h3 style="font-weight: 700; color: #6b3e0e; text-align: center; margin-bottom: 1.2rem;">Registration</h3>
+
+            <label for="name" style="font-weight: 600; color: #6b3e0e;">Name:</label>
+            <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; margin-bottom: 12px; border: 1.5px solid #6b3e0e; border-radius: 4px; font-size: 1rem;">
+
+            <label for="number" style="font-weight: 600; color: #6b3e0e;">Phone Number:</label>
+            <input type="tel" id="number" name="number" required style="width: 100%; padding: 8px; margin-bottom: 12px; border: 1.5px solid #6b3e0e; border-radius: 4px; font-size: 1rem;">
+
+            <label for="email" style="font-weight: 600; color: #6b3e0e;">Email ID:</label>
+            <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; margin-bottom: 12px; border: 1.5px solid #6b3e0e; border-radius: 4px; font-size: 1rem;">
+
+            <label for="password" style="font-weight: 600; color: #6b3e0e;">Password:</label>
+            <input type="password" id="password" name="password" required style="width: 100%; padding: 8px; margin-bottom: 16px; border: 1.5px solid #6b3e0e; border-radius: 4px; font-size: 1rem;">
+
+            <button type="submit" style="width: 100%; background-color: #6b3e0e; color: white; border: none; padding: 10px 0; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: background-color 0.3s;">
+                Submit
+            </button>
+        </form>
+
+    </div>
+</section>
+
+
+<!-- Footer -->
+    <footer>
+        <div class="container">
+            <p> 2025 Ban's & Mish Cafe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script for menu category switching
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // In a real implementation, this would filter the menu items
+                    // For this example, we'll just show an alert
+                    alert('Showing ' + this.textContent + ' menu items');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
